@@ -1,6 +1,6 @@
 # 0x01. Plotting #
 
-<img src="https://github.com/RayBar72/holbertonschool-machine_learning/blob/master/image.png" width="1000" height="450">
+<img src="https://github.com/RayBar72/legendary-enigma/blob/main/imagen.jpg" width="1000" height="450">
 
 ## Learning Objectives ##
 
