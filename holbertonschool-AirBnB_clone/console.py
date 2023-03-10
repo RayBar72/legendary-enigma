@@ -84,7 +84,28 @@ class HBNBCommand(cmd.Cmd):
 
 
     def do_update(self, arg):
-        
+        lista = arg.split()
+        if len(lista) == 0:
+            print('** class name missing **')
+        elif 'BaseModel' not in lista:
+            print("** class doesn't exist **")
+        elif len(lista) == 1:
+            print('** instance id missing **')
+        elif len(lista) == 2:
+            print('** attribute name missing **')
+        elif len(lista) == 3:
+            print('** value missing **')
+        else:
+            idea  = str(lista[0]) + '.' + str(lista[1])
+            if idea not in storage.all():
+                print('** not instance found **')
+            else:
+                try:
+                    tempo = storage.all()
+                    setattr(tempo[idea], lista[2], lista[3])
+                    storage.save()
+                except Exception:
+                    print('** value missing **')
 
 
 if __name__ == '__main__':
