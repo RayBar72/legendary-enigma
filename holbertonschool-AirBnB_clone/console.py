@@ -2,10 +2,22 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 modelos = {'BaseModel': BaseModel,
-           'User': User}
+           'User': User,
+           'State': State,
+           'City': City,
+           'Amenity': Amenity,
+           'Place': Place,
+           'Review': Review}
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -31,10 +43,10 @@ class HBNBCommand(cmd.Cmd):
         lista = arg.split()
         if len(lista) == 0:
             print('** class name missing **')
-        elif 'BaseModel' not in lista:
+        elif lista[0] not in modelos:
             print("** class doesn't exist **")
         else:
-            new = BaseModel()
+            new = modelos[lista[0]]()
             new.save()
             print(new.id)
 
@@ -42,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         lista = arg.split()
         if len(lista) == 0:
             print('** class name missing **')
-        elif 'BaseModel' not in lista:
+        elif lista[0] not in modelos:
             print("** class doesn't exist **")
         elif len(lista) == 1:
             print('** instance id missing **')
@@ -57,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         lista = arg.split()
         if len(lista) == 0:
             print('** class name missing **')
-        elif 'BaseModel' not in lista:
+        elif lista[0] not in modelos:
             print("** class doesn't exist **")
         elif len(lista) == 1:
             print('** instance id missing **')
@@ -75,14 +87,14 @@ class HBNBCommand(cmd.Cmd):
         lista = arg.split()
         if len(lista) == 0:
             print('** class name missing **')
-        elif 'BaseModel' not in lista:
+        elif lista[0] not in modelos:
             print("** class doesn't exist **")
         else:
             reto = []
             tempo = storage.all()
             for k in tempo.keys():
                 clase = k.split('.')[0]
-                if clase == 'BaseModel':
+                if clase == lista[0]:
                     reto.append(str(tempo[k]))
             print(reto)
 
@@ -92,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
         lista = lista0[0].split()
         if len(lista) == 0:
             print('** class name missing **')
-        elif 'BaseModel' not in lista:
+        elif lista[0] not in modelos:
             print("** class doesn't exist **")
         elif len(lista) == 1:
             print('** instance id missing **')

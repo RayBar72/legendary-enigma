@@ -3,10 +3,20 @@ import json
 import os.path
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 modelos = {'BaseModel': BaseModel,
-           'User': User}
+           'User': User,
+           'State': State,
+           'City': City,
+           'Amenity': Amenity,
+           'Place': Place,
+           'Review': Review}
 
 
 class FileStorage:
@@ -35,7 +45,7 @@ class FileStorage:
                 temp = {}
                 for k, v in r.items():
                     llave = k.split('.')
-                    temp[k] = modelos[llave](**v)
+                    temp[k] = modelos[llave[0]](**v)
                 self.__objects = temp
         else:
             return

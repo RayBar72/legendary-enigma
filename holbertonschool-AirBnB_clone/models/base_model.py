@@ -21,7 +21,7 @@ class BaseModel:
                     setattr(self, k, kwargs[k])
 
     def __str__(self):
-        name = __class__.__name__
+        name = self.__class__.__name__
         id = self.id
         dicto = self.__dict__
         return '[{}] ({}) {}'.format(name, id, dicto)
