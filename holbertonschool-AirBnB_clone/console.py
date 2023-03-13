@@ -3,6 +3,10 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
+modelos = {'BaseModel': BaseModel,
+           'User': User}
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
@@ -84,7 +88,8 @@ class HBNBCommand(cmd.Cmd):
 
 
     def do_update(self, arg):
-        lista = arg.split()
+        lista0 = arg.split('"')
+        lista = lista0[0].split()
         if len(lista) == 0:
             print('** class name missing **')
         elif 'BaseModel' not in lista:
@@ -93,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
         elif len(lista) == 2:
             print('** attribute name missing **')
-        elif len(lista) == 3:
+        elif len(lista0) == 1:
             print('** value missing **')
         else:
             idea  = str(lista[0]) + '.' + str(lista[1])
@@ -102,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 try:
                     tempo = storage.all()
-                    setattr(tempo[idea], lista[2], lista[3])
+                    setattr(tempo[idea], lista[2], lista0[1])
                     storage.save()
                 except Exception:
                     print('** value missing **')

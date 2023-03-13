@@ -2,6 +2,12 @@
 import json
 import os.path
 from models.base_model import BaseModel
+from models.user import User
+
+
+modelos = {'BaseModel': BaseModel,
+           'User': User}
+
 
 class FileStorage:
     __file_path = 'file.json'
@@ -28,7 +34,8 @@ class FileStorage:
                 r = dict(json.load(f))
                 temp = {}
                 for k, v in r.items():
-                    temp[k] = BaseModel(**v)
+                    llave = k.split('.')
+                    temp[k] = modelos[llave](**v)
                 self.__objects = temp
         else:
             return
