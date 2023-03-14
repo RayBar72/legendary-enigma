@@ -17,6 +17,14 @@ modelos = {'BaseModel': BaseModel,
            'Amenity': Amenity,
            'Place': Place,
            'Review': Review}
+comandos = ['quit',
+            'EOF',
+            'help',
+            'create',
+            'show',
+            'destroy',
+            'all',
+            'update']
 
 
 class HBNBCommand(cmd.Cmd):
@@ -123,6 +131,24 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                 except Exception:
                     print('** value missing **')
+
+    def default(self, arg):
+        punto = arg.split('.')
+        pare = punto[1].split('(')
+        if not arg:
+            self.do_emptyline(self, arg)
+        elif pare[0] not in comandos:
+            print('** Command does not exist **')
+        else:
+            stringo = str(pare[0]) + ' ' + str(punto[0])
+            if len(pare) == 2:
+                for i in range(1, len(pare)):
+                    s = pare[i]
+                    if i == len(pare) - 1:
+                        s = s[:-1]
+                    stringo += s
+            print(stringo)
+            cmd.Cmd.onecmd(self, stringo)
 
 
 if __name__ == '__main__':
