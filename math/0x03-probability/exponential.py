@@ -3,6 +3,7 @@
 Module that models a exponential distribution
 """
 
+
 class Exponential:
     """
     Class that models an exponential distribution
@@ -10,6 +11,7 @@ class Exponential:
     global pi, e
     pi = 3.1415926536
     e = 2.7182818285
+
     def __init__(self, data=None, lambtha=1) -> None:
         """Function that init a Exponential class
 
@@ -46,7 +48,6 @@ class Exponential:
         if x <= 0:
             return 0
         return self.lambtha * ((e) ** (- self.lambtha * x))
-
 
     def cdf(self, x):
         """Function that calculates the cumulative density funct
