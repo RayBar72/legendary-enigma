@@ -82,6 +82,14 @@ class NeuralNetwork:
         return self.__A2
 
     def forward_prop(self, X):
+        """Forward propagation function
+
+        Args:
+            X (ndarray): Inputs
+
+        Returns:
+            ndarray: Outputs
+        """
         z1 = self.__W1 @ X + self.__b1
         a1 = 1 / (1 + np.exp(- z1))
         self.__A1 = a1
